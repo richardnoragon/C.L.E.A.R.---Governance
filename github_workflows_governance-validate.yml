@@ -1,0 +1,56 @@
+should be saved as .github/workflows/governance-validate.yml
+name: Governance Validation
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+      - '.github/workflows/governance-validate.yml'
+  push:
+    branches: [ main, master ]
+    paths:
+      - '**.md'
+      - '.github/workflows/governance-validate.yml'
+
+jobs:
+  governance-checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate core governance files exist
+        run: |
+          test -f CHARTER.md || (echo "Missing CHARTER.md" && exit 1)
+          test -f SPEC.md || (echo "Missing SPEC.md" && exit 1)
+          test -f GOVERNANCE.md || (echo "Missing GOVERNANCE.md" && exit 1)
+
+      - name: Check required directories
+        run: |
+          for d in roles templates lifecycle anti-patterns enforcement adoption review-cycles docs; do
+            if [ ! -d "$d" ]; then
+              echo "Missing directory: $d"
+              exit 1
+            fi
+          done
+
+      - name: Optional markdown lint
+        uses: avto-dev/markdown-lint@v1
+        if: always()
+        with:
+          config: '.markdownlint.yml'
+          args: '**/*.md'
+        continue-on-error: true
+
+      - name: Basic standard template check
+        run: |
+          if ls standards/*.md >/dev/null 2>&1; then
+            for f in standards/*.md; do
+              echo "Checking $$f"
+              grep -q "Problem Statement" "$$f" || (echo "Missing 'Problem Statement' in $$f" && exit 1)
+              grep -q "Specification (Normative)" "$$f" || (echo "Missing 'Specification (Normative)' in $$f" && exit 1)
+            done
+          else
+            echo "No standards/ directory or files yet; skipping."
+          fi

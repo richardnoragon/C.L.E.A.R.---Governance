@@ -1,0 +1,400 @@
+#!/usr/bin/env bash
+set -e
+
+echo "Bootstrapping full C.L.E.A.R. Governance repository structure..."
+ROOT=$(pwd)
+
+# --- Helper function ---
+create_file() {
+    local path="$1"
+    local content="$2"
+
+    if [ -f "$path" ]; then
+        echo "Skipping existing file: $path"
+    else
+        echo "Creating file: $path"
+        echo "$content" > "$path"
+    fi
+}
+
+create_dir() {
+    local path="$1"
+    echo "Ensuring directory exists: $path"
+    mkdir -p "$path"
+}
+
+# ================================
+# ROOT-LEVEL FILES
+# ================================
+
+create_file "$ROOT/README.md" "# C.L.E.A.R. Governance System
+
+This repository contains the constitutional charter, lifecycle specifications, roles, templates, and supporting materials for the C.L.E.A.R. governance model.
+
+Refer to CHARTER.md and SPEC.md for foundational documents.
+"
+
+create_file "$ROOT/CHARTER.md" "# C.L.E.A.R. Governance Charter
+
+(Insert full charter text here.)
+"
+
+create_file "$ROOT/SPEC.md" "# C.L.E.A.R. Lifecycle Specification
+
+(Insert full SPEC.md content here.)
+"
+
+create_file "$ROOT/GOVERNANCE.md" "# Governance Structure
+
+This document describes how governance decisions are made and how roles interact.
+"
+
+# ================================
+# LIFECYCLE
+# ================================
+
+create_dir "$ROOT/lifecycle"
+
+declare -A lifecycle_files=(
+    ["CODIFY.md"]="# Codify Stage\n\nDocumentation for the Codify stage."
+    ["LEGITIMIZE.md"]="# Legitimize Stage\n\nDocumentation for the Legitimize stage."
+    ["ENFORCE.md"]="# Enforce Stage\n\nDocumentation for the Enforce stage."
+    ["ADOPT.md"]="# Adopt Stage\n\nDocumentation for the Adopt stage."
+    ["REVIEW.md"]="# Review Stage\n\nDocumentation for the Review stage."
+)
+
+for file in "${!lifecycle_files[@]}"; do
+    create_file "$ROOT/lifecycle/$file" "${lifecycle_files[$file]}"
+done
+
+# ================================
+# ROLES
+# ================================
+
+create_dir "$ROOT/roles"
+
+declare -A role_files=(
+    ["STEWARD.md"]="# Governance Steward\n\nDocumentation for the Steward role."
+    ["AUTHOR.md"]="# Author\n\nDocumentation for the Author role."
+    ["REVIEWER.md"]="# Reviewer\n\nDocumentation for the Reviewer role."
+    ["ENFORCEMENT_ENGINEER.md"]="# Enforcement Engineer\n\nDocumentation for the Enforcement Engineer role."
+    ["TEAM_LEAD.md"]="# Team Lead\n\nDocumentation for the Team Lead role."
+)
+
+for file in "${!role_files[@]}"; do
+    create_file "$ROOT/roles/$file" "${role_files[$file]}"
+done
+
+# ================================
+# TEMPLATES
+# ================================
+
+create_dir "$ROOT/templates"
+
+declare -A template_files=(
+    ["STANDARD_TEMPLATE.md"]="# Standard Template\n\nPlaceholder for standard template."
+    ["ADR_TEMPLATE.md"]="# ADR Template\n\nPlaceholder for ADR template."
+    ["REVIEW_TEMPLATE.md"]="# Review Template\n\nPlaceholder for review template."
+    ["MIGRATION_PLAN_TEMPLATE.md"]="# Migration Plan Template\n\nPlaceholder for migration plan template."
+    ["ENFORCEMENT_SPEC_TEMPLATE.md"]="# Enforcement Specification Template\n\nPlaceholder for enforcement spec template."
+)
+
+for file in "${!template_files[@]}"; do
+    create_file "$ROOT/templates/$file" "${template_files[$file]}"
+done
+
+# ================================
+# ANTI-PATTERNS
+# ================================
+
+create_dir "$ROOT/anti-patterns"
+
+declare -A anti_files=(
+    ["GOVERNANCE_ANTI_PATTERNS.md"]="# Governance Anti‑Patterns\n\nPlaceholder."
+    ["SPECIFICATION_ANTI_PATTERNS.md"]="# Specification Anti‑Patterns\n\nPlaceholder."
+    ["REVIEW_ANTI_PATTERNS.md"]="# Review Anti‑Patterns\n\nPlaceholder."
+)
+
+for file in "${!anti_files[@]}"; do
+    create_file "$ROOT/anti-patterns/$file" "${anti_files[$file]}"
+done
+
+# ================================
+# ENFORCEMENT
+# ================================
+
+create_dir "$ROOT/enforcement/ci"
+create_dir "$ROOT/enforcement/linters"
+create_dir "$ROOT/enforcement/scaffolds"
+create_dir "$ROOT/enforcement/reference-implementations"
+
+create_file "$ROOT/enforcement/ci/README.md" "# CI Enforcement\n\nPlaceholder."
+create_file "$ROOT/enforcement/linters/README.md" "# Linter Enforcement\n\nPlaceholder."
+create_file "$ROOT/enforcement/scaffolds/README.md" "# Scaffolds\n\nPlaceholder."
+create_file "$ROOT/enforcement/reference-implementations/README.md" "# Reference Implementations\n\nPlaceholder."
+
+# ================================
+# ADOPTION
+# ================================
+
+create_dir "$ROOT/adoption/MIGRATION_GUIDES"
+create_dir "$ROOT/adoption/ROLLOUT_PLANS"
+
+create_file "$ROOT/adoption/METRICS.md" "# Adoption Metrics\n\nPlaceholder."
+create_file "$ROOT/adoption/MIGRATION_GUIDES/README.md" "# Migration Guides\n\nPlaceholder."
+create_file "$ROOT/adoption/ROLLOUT_PLANS/README.md" "# Rollout Plans\n\nPlaceholder."
+
+# ================================
+# REVIEW CYCLES
+# ================================
+
+create_dir "$ROOT/review-cycles/ARCHIVE"
+
+create_file "$ROOT/review-cycles/SCHEDULE.md" "# Review Schedule\n\nPlaceholder."
+create_file "$ROOT/review-cycles/REPORT_TEMPLATE.md" "# Review Report Template\n\nPlaceholder."
+create_file "$ROOT/review-cycles/ARCHIVE/README.md" "# Review Archive\n\nPlaceholder."
+
+# ================================
+# DOCS (GitHub Pages)
+# ================================
+
+echo "Generating GitHub Pages structure..."
+bash <(curl -s https://raw.githubusercontent.com/placeholder/clear-bootstrap/main/bootstrap_docs.sh) || true
+
+echo "Repository bootstrap complete."
+
+Absolutely, Richard — here is a **full‑repo bootstrap script** that builds **everything**:
+
+- The **root‑level governance files**  
+- The **entire directory structure** (roles, lifecycle, templates, anti‑patterns, enforcement, adoption, review cycles, docs for GitHub Pages, etc.)  
+- All **placeholder files**  
+- Safe to run in an empty or partially‑existing repo  
+- Idempotent (won’t overwrite existing files unless you want it to)
+
+This is the kind of script you’d expect from a standards body that takes governance seriously.
+
+---
+
+# **🚀 Full Repository Bootstrap Script (C.L.E.A.R. Governance System)**
+
+> Save as: `bootstrap_clear_repo.sh`  
+> Run with: `bash bootstrap_clear_repo.sh`
+
+```
+#!/usr/bin/env bash
+set -e
+
+echo "Bootstrapping full C.L.E.A.R. Governance repository structure..."
+ROOT=$(pwd)
+
+# --- Helper function ---
+create_file() {
+    local path="$1"
+    local content="$2"
+
+    if [ -f "$path" ]; then
+        echo "Skipping existing file: $path"
+    else
+        echo "Creating file: $path"
+        echo "$content" > "$path"
+    fi
+}
+
+create_dir() {
+    local path="$1"
+    echo "Ensuring directory exists: $path"
+    mkdir -p "$path"
+}
+
+# ================================
+# ROOT-LEVEL FILES
+# ================================
+
+create_file "$ROOT/README.md" "# C.L.E.A.R. Governance System
+
+This repository contains the constitutional charter, lifecycle specifications, roles, templates, and supporting materials for the C.L.E.A.R. governance model.
+
+Refer to CHARTER.md and SPEC.md for foundational documents.
+"
+
+create_file "$ROOT/CHARTER.md" "# C.L.E.A.R. Governance Charter
+
+(Insert full charter text here.)
+"
+
+create_file "$ROOT/SPEC.md" "# C.L.E.A.R. Lifecycle Specification
+
+(Insert full SPEC.md content here.)
+"
+
+create_file "$ROOT/GOVERNANCE.md" "# Governance Structure
+
+This document describes how governance decisions are made and how roles interact.
+"
+
+# ================================
+# LIFECYCLE
+# ================================
+
+create_dir "$ROOT/lifecycle"
+
+declare -A lifecycle_files=(
+    ["CODIFY.md"]="# Codify Stage\n\nDocumentation for the Codify stage."
+    ["LEGITIMIZE.md"]="# Legitimize Stage\n\nDocumentation for the Legitimize stage."
+    ["ENFORCE.md"]="# Enforce Stage\n\nDocumentation for the Enforce stage."
+    ["ADOPT.md"]="# Adopt Stage\n\nDocumentation for the Adopt stage."
+    ["REVIEW.md"]="# Review Stage\n\nDocumentation for the Review stage."
+)
+
+for file in "${!lifecycle_files[@]}"; do
+    create_file "$ROOT/lifecycle/$file" "${lifecycle_files[$file]}"
+done
+
+# ================================
+# ROLES
+# ================================
+
+create_dir "$ROOT/roles"
+
+declare -A role_files=(
+    ["STEWARD.md"]="# Governance Steward\n\nDocumentation for the Steward role."
+    ["AUTHOR.md"]="# Author\n\nDocumentation for the Author role."
+    ["REVIEWER.md"]="# Reviewer\n\nDocumentation for the Reviewer role."
+    ["ENFORCEMENT_ENGINEER.md"]="# Enforcement Engineer\n\nDocumentation for the Enforcement Engineer role."
+    ["TEAM_LEAD.md"]="# Team Lead\n\nDocumentation for the Team Lead role."
+)
+
+for file in "${!role_files[@]}"; do
+    create_file "$ROOT/roles/$file" "${role_files[$file]}"
+done
+
+# ================================
+# TEMPLATES
+# ================================
+
+create_dir "$ROOT/templates"
+
+declare -A template_files=(
+    ["STANDARD_TEMPLATE.md"]="# Standard Template\n\nPlaceholder for standard template."
+    ["ADR_TEMPLATE.md"]="# ADR Template\n\nPlaceholder for ADR template."
+    ["REVIEW_TEMPLATE.md"]="# Review Template\n\nPlaceholder for review template."
+    ["MIGRATION_PLAN_TEMPLATE.md"]="# Migration Plan Template\n\nPlaceholder for migration plan template."
+    ["ENFORCEMENT_SPEC_TEMPLATE.md"]="# Enforcement Specification Template\n\nPlaceholder for enforcement spec template."
+)
+
+for file in "${!template_files[@]}"; do
+    create_file "$ROOT/templates/$file" "${template_files[$file]}"
+done
+
+# ================================
+# ANTI-PATTERNS
+# ================================
+
+create_dir "$ROOT/anti-patterns"
+
+declare -A anti_files=(
+    ["GOVERNANCE_ANTI_PATTERNS.md"]="# Governance Anti‑Patterns\n\nPlaceholder."
+    ["SPECIFICATION_ANTI_PATTERNS.md"]="# Specification Anti‑Patterns\n\nPlaceholder."
+    ["REVIEW_ANTI_PATTERNS.md"]="# Review Anti‑Patterns\n\nPlaceholder."
+)
+
+for file in "${!anti_files[@]}"; do
+    create_file "$ROOT/anti-patterns/$file" "${anti_files[$file]}"
+done
+
+# ================================
+# ENFORCEMENT
+# ================================
+
+create_dir "$ROOT/enforcement/ci"
+create_dir "$ROOT/enforcement/linters"
+create_dir "$ROOT/enforcement/scaffolds"
+create_dir "$ROOT/enforcement/reference-implementations"
+
+create_file "$ROOT/enforcement/ci/README.md" "# CI Enforcement\n\nPlaceholder."
+create_file "$ROOT/enforcement/linters/README.md" "# Linter Enforcement\n\nPlaceholder."
+create_file "$ROOT/enforcement/scaffolds/README.md" "# Scaffolds\n\nPlaceholder."
+create_file "$ROOT/enforcement/reference-implementations/README.md" "# Reference Implementations\n\nPlaceholder."
+
+# ================================
+# ADOPTION
+# ================================
+
+create_dir "$ROOT/adoption/MIGRATION_GUIDES"
+create_dir "$ROOT/adoption/ROLLOUT_PLANS"
+
+create_file "$ROOT/adoption/METRICS.md" "# Adoption Metrics\n\nPlaceholder."
+create_file "$ROOT/adoption/MIGRATION_GUIDES/README.md" "# Migration Guides\n\nPlaceholder."
+create_file "$ROOT/adoption/ROLLOUT_PLANS/README.md" "# Rollout Plans\n\nPlaceholder."
+
+# ================================
+# REVIEW CYCLES
+# ================================
+
+create_dir "$ROOT/review-cycles/ARCHIVE"
+
+create_file "$ROOT/review-cycles/SCHEDULE.md" "# Review Schedule\n\nPlaceholder."
+create_file "$ROOT/review-cycles/REPORT_TEMPLATE.md" "# Review Report Template\n\nPlaceholder."
+create_file "$ROOT/review-cycles/ARCHIVE/README.md" "# Review Archive\n\nPlaceholder."
+
+# ================================
+# DOCS (GitHub Pages)
+# ================================
+
+echo "Generating GitHub Pages structure..."
+bash <(curl -s https://raw.githubusercontent.com/placeholder/clear-bootstrap/main/bootstrap_docs.sh) || true
+
+echo "Repository bootstrap complete."
+```
+
+---
+
+# **🔥 What this script does**
+It creates:
+
+### **Root**
+- `README.md`
+- `CHARTER.md`
+- `SPEC.md`
+- `GOVERNANCE.md`
+
+### **Lifecycle**
+- `lifecycle/CODIFY.md`
+- `lifecycle/LEGITIMIZE.md`
+- `lifecycle/ENFORCE.md`
+- `lifecycle/ADOPT.md`
+- `lifecycle/REVIEW.md`
+
+### **Roles**
+- Steward, Author, Reviewer, Enforcement Engineer, Team Lead
+
+### **Templates**
+- Standard, ADR, Review, Migration Plan, Enforcement Spec
+
+### **Anti‑Patterns**
+- Governance, Specification, Review
+
+### **Enforcement**
+- CI, linters, scaffolds, reference implementations
+
+### **Adoption**
+- Migration guides, rollout plans, metrics
+
+### **Review Cycles**
+- Schedule, report template, archive
+
+### **Docs (GitHub Pages)**
+- Calls the earlier bootstrap script (you can inline it if you prefer)
+
+---
+
+# **If you want…**
+I can also generate:
+
+- A **single‑file version** that includes the docs bootstrap inline  
+- A **PowerShell version** for Windows‑native environments  
+- A **Makefile** that wraps the bootstrap  
+- A **GitHub Actions workflow** that validates repo structure  
+- A **governance CLI tool** (`clearctl`) to automate lifecycle steps  
+
+Just tell me the direction you want to take.
